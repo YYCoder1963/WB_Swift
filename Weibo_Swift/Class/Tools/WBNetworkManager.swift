@@ -24,14 +24,14 @@ class WBNetworkManager: AFHTTPSessionManager {
     }()
     
     lazy var userAccount = WBUserAccount()
-//    var accessToken: String? = "2.00a3XzyBgSlaPDe85b4bcd2abkjwwC"
-//    var uid: String? = "1073880650"
+    var accessToken: String? = "2.00a3XzyBgSlaPDe85b4bcd2abkjwwC"
+//"2.00aME5rGgSlaPD4c1c542fe10ogMWY"//    var uid: String? = "1073880650"//
     var userLogon :(Bool) {
-         return userAccount.access_token != nil
+         return accessToken != nil
     }
     
     func tokenRequest(method:WBHttpMethod = .GET,urlString:String,parameters:[String:AnyObject]?,completion:@escaping (_ json:Any?,_ isSuccess:Bool) -> ()) -> () {
-        guard let token = userAccount.access_token else {
+        guard let token = accessToken else {
             print("没有token，需要登录")
             completion(nil, false)
             return
@@ -55,33 +55,17 @@ class WBNetworkManager: AFHTTPSessionManager {
             print(json ?? "")
         }
         
-//        let failure = {(task:URLSessionDataTask?,error:NSError) -> () in
-//            if (task?.response as? HTTPURLResponse)?.statusCode == 403 {
-//                print("token过期")
-//            }
-//           completion(nil, false)
-//        }
-        
-        
+        let failure = {(task:URLSessionDataTask?,error:NSError) -> () in
+            if (task?.response as? HTTPURLResponse)?.statusCode == 403 {
+                print("token过期")
+            }
+           completion(nil, false)
+        }
        
         if method == .GET {
-            get(urlString, parameters: parameters, progress: nil, success: success, failure:{ (task:URLSessionDataTask?,error:NSError) in
-                print("\(error)")
-                if (task?.response as? HTTPURLResponse)?.statusCode == 403 {
-                    print("token过期")
-                }
-                completion(nil, false)
-                } as? (URLSessionDataTask?, Error) -> Void)
-//            get(urlString, parameters: parameters, progress: nil, success:success, failure: failure as? (URLSessionDataTask?, Error) -> Void)
+            get(urlString, parameters: parameters, progress: nil, success:success, failure: failure as? (URLSessionDataTask?, Error) -> Void)
         } else {
-            post(urlString, parameters: parameters, progress: nil, success: success, failure:{ (task:URLSessionDataTask?,error:NSError) in
-                print("\(error)")
-                if (task?.response as? HTTPURLResponse)?.statusCode == 403 {
-                    print("token过期")
-                }
-                completion(nil, false)
-                } as? (URLSessionDataTask?, Error) -> Void)
-//            post(urlString, parameters: parameters, progress: nil, success: success, failure: failure as? (URLSessionDataTask?, Error) -> Void)
+            post(urlString, parameters: parameters, progress: nil, success: success, failure: failure as? (URLSessionDataTask?, Error) -> Void)
         }
         
     

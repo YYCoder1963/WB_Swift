@@ -54,8 +54,18 @@ extension WBHomeViewController{
         super.setUpTableView()
         navItem.leftBarButtonItem = UIBarButtonItem(title: "好友", fontSize: 16, target: self, action: #selector(friends),isBack:false)
         tableView?.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        setUpNavTitle()
     }
     
+    private func setUpNavTitle() {
+        let button = WBTitleButton.init(title: "哇哈哈")
+        button.addTarget(self, action: #selector(navTitleClicked(btn:)), for: .touchUpInside)
+        navItem.titleView = button
+    }
+    
+    @objc func navTitleClicked(btn:UIButton){
+        btn.isSelected = !btn.isSelected
+    }
 }
 
 extension WBHomeViewController{

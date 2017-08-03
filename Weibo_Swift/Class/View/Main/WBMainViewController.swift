@@ -17,7 +17,7 @@ class WBMainViewController: UITabBarController {
         delegate = self
         setUpControllers()
         setUpComposeButton()
-//        setUpTimer()
+        setUpTimer()
         
         NotificationCenter.default.addObserver(self, selector: #selector(userLogin), name:NSNotification.Name(rawValue: WBUserShouldLoginNotification), object: nil)
     }
@@ -65,7 +65,7 @@ private extension WBMainViewController{
         if !WBNetworkManager.shared.userLogon {
             return
         }
-        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
     @objc private func updateTimer() {

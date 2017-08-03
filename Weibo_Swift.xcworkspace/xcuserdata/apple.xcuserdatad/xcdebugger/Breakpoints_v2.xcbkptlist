@@ -17,14 +17,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Weibo_Swift/Class/Tools/WBNetworkManager.swift"
-            timestampString = "523368543.934091"
+            filePath = "Weibo_Swift/Class/Tools/WBNetworkManager+Extension.swift"
+            timestampString = "523424463.21885"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "userLogon"
-            landmarkType = "24">
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "loadAccessToken(code:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
