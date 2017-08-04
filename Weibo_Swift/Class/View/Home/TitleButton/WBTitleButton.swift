@@ -9,12 +9,13 @@
 import UIKit
 
 class WBTitleButton: UIButton {
+    
     init(title: String?) {
         super.init(frame: CGRect())
         if title == nil {
             setTitle("首页", for: [])
         } else {
-            setTitle(title, for: [])
+            setTitle(title! + " ", for: [])
             setImage(UIImage(named:"navigationbar_arrow_down"), for: [])
             setImage(UIImage(named:"navigationbar_arrow_up"), for: .selected)
         }
@@ -28,4 +29,10 @@ class WBTitleButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+            guard let titleLabel = titleLabel,let imageView = imageView else { return }
+            titleLabel.frame = (titleLabel.frame.offsetBy(dx: -(imageView.bounds.width), dy: 0))
+            imageView.frame = (imageView.frame.offsetBy(dx: (titleLabel.bounds.width), dy: 0))
+    }
 }
